@@ -10,7 +10,7 @@ public class TreeSort extends Sort {
     }
 
     private class BinaryTree {
-        Node root;
+        private Node root;
 
         private void insert(int[] array) {
             for (int index = 0; index < array.length; index++) {
@@ -50,9 +50,9 @@ public class TreeSort extends Sort {
         }
 
         private class Node {
-            int key;
-            Node left;
-            Node right;
+            private int key;
+            private Node left;
+            private Node right;
 
             private Node(int key) {
                 this.key = key;
