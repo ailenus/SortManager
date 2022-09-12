@@ -5,15 +5,15 @@ public class TreeSort extends Sort {
     @Override
     protected void sortHelper(int[] array, int length) {
         BinaryTree binaryTree = new BinaryTree();
-        binaryTree.insert(array);
+        binaryTree.insert(array, length);
         binaryTree.traverseInOrder(binaryTree.root, array, 0);
     }
 
     private class BinaryTree {
         private Node root;
 
-        private void insert(int[] array) {
-            for (int index = 0; index < array.length; index++) {
+        private void insert(int[] array, int length) {
+            for (int index = 0; index < length; index++) {
                 insert(array[index]);
             }
         }
