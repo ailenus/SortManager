@@ -1,7 +1,5 @@
 # Sorter
 
-Task for Engineering 149 at Sparta Global.
-
 This is a collection of sorting algorithms.
 
 Currently, there are seven sorting algorithms implemented: bubble sort,
@@ -9,14 +7,13 @@ heapsort, insertion sort, merge sort, quicksort, selection sort, and tree sort.
 
 ## Organisation
 
-The repository consists of several packages, of which the
-`com.spartaglobal.ymao` is the root. The `main` package consists of the main
-class `App` containing the main method, and a `Sort` enum and a `SortTime`
-class for testing execution time.  The `sorter` package consists of the sorting
-algorithms, as well as an abstract class `Sort` which is the superclass of all
-sorting classes, and the `Sorter` interface, which `Sort` implements. The `util`
-package consists of the `Utility` class, which hosts auxiliary methods that are
-used by the unit tests.
+The repository consists of several packages, of which `com.spartaglobal.ymao` is
+the root. The `main` package consists of the main class `App` containing the
+main method, and a `Sort` enum and a `SortTime` class for testing execution
+time.  The `sorter` package consists of the sorting algorithms, as well as an
+abstract class `Sort` which is the superclass of all sorting classes, and the
+`Sorter` interface, which `Sort` implements. The `util` package consists of the
+`Utility` class, which hosts auxiliary methods that are used by the unit tests.
 
 The unit test repository consists of one package `sorter`, which contains an
 abstract `SortTest` class which is the superclass of all other unit test
