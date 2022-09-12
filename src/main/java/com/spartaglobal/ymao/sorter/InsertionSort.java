@@ -3,8 +3,7 @@ package com.spartaglobal.ymao.sorter;
 public class InsertionSort extends Sort {
 
     @Override
-    protected void sortHelper(int[] array) {
-        int length = array.length;
+    protected void sortHelper(int[] array, int length) {
         for (int index = 1; index < length; index++) {
             int key = array[index];
             int i = index - 1;

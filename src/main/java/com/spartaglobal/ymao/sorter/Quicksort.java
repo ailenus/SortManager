@@ -3,8 +3,7 @@ package com.spartaglobal.ymao.sorter;
 public class Quicksort extends Sort {
 
     @Override
-    protected void sortHelper(int[] array) {
-        int length = array.length;
+    protected void sortHelper(int[] array, int length) {
         quicksort(array, 0, length - 1);
     }
 

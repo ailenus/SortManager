@@ -7,7 +7,7 @@ import static com.spartaglobal.ymao.util.Utility.*;
 public abstract class SortTest {
 
     public final void initialiseLarge() {
-        initialise(5_000, Integer.MAX_VALUE);
+        initialise(10_000, Integer.MAX_VALUE);
     }
     
     public final void initialiseZero() {

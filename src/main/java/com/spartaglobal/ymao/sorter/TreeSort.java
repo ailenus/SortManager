@@ -3,7 +3,7 @@ package com.spartaglobal.ymao.sorter;
 public class TreeSort extends Sort {
 
     @Override
-    protected void sortHelper(int[] array) {
+    protected void sortHelper(int[] array, int length) {
         BinaryTree binaryTree = new BinaryTree();
         binaryTree.insert(array);
         binaryTree.traverseInOrder(binaryTree.root, array, 0);

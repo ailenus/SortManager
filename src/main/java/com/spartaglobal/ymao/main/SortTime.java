@@ -12,6 +12,10 @@ public class SortTime {
             startTime = nanoTime();
             new BubbleSort().sort(array);
             endTime = nanoTime();
+        } else if (sort.equals(Sort.HEAPSORT)) {
+            startTime = nanoTime();
+            new Heapsort().sort(array);
+            endTime = nanoTime();
         } else if (sort.equals(Sort.INSERTION_SORT)) {
             startTime = nanoTime();
             new InsertionSort().sort(array);

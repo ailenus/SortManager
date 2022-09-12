@@ -6,7 +6,7 @@ public class App {
 
     public static void main(String[] args) {
 
-        int[] array = Utility.random(5_000, Integer.MAX_VALUE);
+        int[] array = Utility.random(10_000, Integer.MAX_VALUE);
 
         for (Sort sort : Sort.values()) {
             System.out.println(sort.toString().toLowerCase() + ":\n    "

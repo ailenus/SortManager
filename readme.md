@@ -4,6 +4,9 @@ Task for Engineering 149 at Sparta Global.
 
 This is a collection of sorting algorithms.
 
+Currently, there are seven sorting algorithms implemented: bubble sort,
+heapsort, insertion sort, merge sort, quicksort, selection sort, and tree sort.
+
 ## Organisation
 
 The repository consists of several of which the `com.spartaglobal.ymao` is the
@@ -20,12 +23,12 @@ other unit test classes contained therein.
 
 ## The `main` package
 
-The `Sort` enum has six elements, corresponding to the six sorting algorithms
-implemented in this repository. The enum is used by the `SortTime` class, which
-contains a single static method `executionTime`, used to time each of the six
-sorting algorithms, using the `nanoTime` method from the `java.lang.System`
-class in the standard library. The main class `App` prints the result of the
-execution time test to the standard output.
+The `Sort` enum has seven elements, corresponding to the seven sorting
+algorithms implemented in this repository. The enum is used by the `SortTime`
+class, which contains a single static method `executionTime`, used to time each
+of the seven sorting algorithms, using the `nanoTime` method from the
+`java.lang.System` class in the standard library. The main class `App` prints
+the result of the execution time test to the standard output.
 
 ## The `sorter` package
 
@@ -39,11 +42,11 @@ is overridden by its subclasses using different sorting algorithms. The `sort`
 method in this abstract class simply makes a copy of the input array and calls
 the abstract `sortHelper` method on the copy before returning it.
 
-There are currently six different sorting algorithms contained in this package:
-bubble sort, insertion sort, merge sort, quicksort, selection sort, and tree
-sort. Each of the sorting algorithms has its own class that extends the abstract
-`Sort` class and overrides the protected `sortHelper` method, using the named
-sorting algorithm.
+There are currently seven different sorting algorithms contained in this
+package: bubble sort, insertion sort, merge sort, quicksort, selection sort, and
+tree sort. Each of the sorting algorithms has its own class that extends the
+abstract `Sort` class and overrides the protected `sortHelper` method, using the
+named sorting algorithm.
 
 ## The `util` package
 
@@ -70,3 +73,6 @@ is the unit test for testing each of the sorting algorithms with large values,
 and the `testZero` method is that with empty values. The `testSorted` is used
 for testing sorting an array that is already sorted.
 
+Each of the seven testing classes implements the three abstract classes by
+invoking either the `initialiseLarge` or the `initialiseZero` method of the
+superclass and then using `assertArrayEquals` from the `org.junit.Assert` class.

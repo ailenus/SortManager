@@ -6,11 +6,12 @@ public abstract class Sort implements Sorter {
 
     @Override
     public final int[] sort(int[] input) {
-        int[] result = Arrays.copyOf(input, input.length);
-        sortHelper(result);
+        int length = input.length;
+        int[] result = Arrays.copyOf(input, length);
+        sortHelper(result, length);
         return result;
     }
 
-    protected abstract void sortHelper(int[] array);
+    protected abstract void sortHelper(int[] array, int length);
 
 }

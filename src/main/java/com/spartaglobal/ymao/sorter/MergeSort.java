@@ -3,8 +3,7 @@ package com.spartaglobal.ymao.sorter;
 public class MergeSort extends Sort {
 
     @Override
-    protected void sortHelper(int[] array) {
-        int length = array.length;
+    protected void sortHelper(int[] array, int length) {
         mergeSort(array, length);
     }
 
