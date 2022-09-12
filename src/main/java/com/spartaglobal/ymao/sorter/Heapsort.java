@@ -15,7 +15,7 @@ public class Heapsort extends Sort {
         }
     }
 
-    private void heapify(int[] array, int length, int index) {
+    private static void heapify(int[] array, int length, int index) {
         int max = index;
         int left = 2 * index + 1;
         int right = 2 * index + 2;
