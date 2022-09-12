@@ -9,11 +9,11 @@ heapsort, insertion sort, merge sort, quicksort, selection sort, and tree sort.
 
 The repository consists of several packages, of which `com.spartaglobal.ymao` is
 the root. The `main` package consists of the main class `App` containing the
-main method, and a `Sort` enum and a `SortTime` class for testing execution
-time.  The `sorter` package consists of the sorting algorithms, as well as an
-abstract class `Sort` which is the superclass of all sorting classes, and the
-`Sorter` interface, which `Sort` implements. The `util` package consists of the
-`Utility` class, which hosts auxiliary methods that are used by the unit tests.
+main method, a `Sort` enum, and a `SortTime` class for testing execution time.
+The `sorter` package consists of the sorting algorithms, as well as an abstract
+class `Sort` which is the superclass of all sorting classes, and the `Sorter`
+interface, which `Sort` implements. The `util` package consists of the `Utility`
+class, which hosts auxiliary methods that are used by the unit tests.
 
 The unit test repository consists of one package `sorter`, which contains an
 abstract `SortTest` class which is the superclass of all other unit test
@@ -34,13 +34,14 @@ returns an array that is sorted and contains the exact elements as in the passed
 array.
 
 The abstract `Sort` class, implementing the `Sorter` interface, overrides the
-`sort` method as `final` and invokes a protected abstract method `sortHelper`
-that is overridden using different sorting algorithms. The `sort` method in this
-class simply makes a copy of the input array and invokes the `sortHelper` method
-and passing it the array copy before returning it. The `sortHelper` method
-additionally takes an integer parameter as the length of the array, since almost
-all sorting algorithms make use of the array length. This abstraction eliminates
-duplicate code of accessing the array length in the myriad sorting subclasses.
+`sort` method as final and invokes a protected abstract method `sortHelper`
+that is overridden using different sorting algorithms by its seven subclasses.
+The `sort` method in this class simply makes a copy of the input array and
+invokes the `sortHelper` method and passing it the array copy before returning
+it. The `sortHelper` method additionally takes the length of the array as an
+integer parameter, since all sorting algorithms make use of the array length.
+This abstraction eliminates duplicate code of accessing the array length in its
+subclasses.
 
 There are currently seven different sorting algorithms contained in this
 package: bubble sort, heapsort, insertion sort, merge sort, quicksort, selection
@@ -57,13 +58,13 @@ method.
 
 The `MergeSort` class contains two additional private methods, `mergeSort` and
 `merge`. The `mergeSort` method recurses and invokes the `merge` method, and the
-`merge` method merges two sorted array. Its implementation of `sortHelper`
+`merge` method merges two sorted arrays. Its implementation of `sortHelper`
 simply invokes the `mergeSort` method.
 
 The `Quicksort` class also contains two private methods, `quicksort` and
 `partition`. The `quicksort` method recurses and invokes the `partition` method,
 and the `partition` method returns the index of the partition. Its
-implementation of `sortHelper` simply invokes the `quicksort` method.
+implementation of `sortHelper` invokes the `quicksort` method.
 
 The `TreeSort` class contains a private nested class `BinaryTree`, which
 furthermore contains a private nested class `Node`. The `Node` class contains
@@ -108,4 +109,5 @@ for testing sorting an array that is already sorted.
 
 Each of the seven testing classes implements the three abstract classes by
 invoking either the `initialiseLarge` or the `initialiseZero` method of the
-superclass and then using `assertArrayEquals` from the `org.junit.Assert` class.
+superclass and then using the `assertArrayEquals` method from the
+`org.junit.Assert` class.
