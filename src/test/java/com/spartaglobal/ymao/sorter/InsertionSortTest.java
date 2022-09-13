@@ -4,7 +4,8 @@ import static org.junit.Assert.assertArrayEquals;
 
 import org.junit.Test;
 
-import static com.spartaglobal.ymao.util.RandomArray.*;
+import static com.spartaglobal.ymao.util.RandomArray.getInput;
+import static com.spartaglobal.ymao.util.RandomArray.getResult;
 
 public class InsertionSortTest extends SortTest {
 

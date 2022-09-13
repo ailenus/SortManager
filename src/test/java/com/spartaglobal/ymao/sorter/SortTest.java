@@ -2,7 +2,7 @@ package com.spartaglobal.ymao.sorter;
 
 import org.junit.Test;
 
-import static com.spartaglobal.ymao.util.RandomArray.*;
+import static com.spartaglobal.ymao.util.RandomArray.initialise;
 
 public abstract class SortTest {
 
