@@ -4,13 +4,13 @@ import java.util.Arrays;
 import java.util.Random;
 import java.util.stream.IntStream;
 
-public class Utility {
+public class RandomArray {
 
     private static int[] input;
     private static int[] result;
 
     public static void initialise(int length, int bound) {
-        input = random(length, bound);
+        input = getRandomArray(length, bound);
         result = Arrays.copyOf(input, length);
         Arrays.sort(result);
     }
@@ -23,15 +23,7 @@ public class Utility {
         return result;
     }
 
-    /**
-     * Generates an array of random ints of length from 0 (inclusive) to bound
-     * (exclusive).
-     * @param length - an int specifying the length of the returned array
-     * @param bound - an int specifying the upper bound (exclusive) of the
-     * randomly generated ints inside the returned array
-     * @return the array of randomly generated ints
-     */
-    public static int[] random(int length, int bound) {
+    public static int[] getRandomArray(int length, int bound) {
         return IntStream.generate(()
                 -> new Random().nextInt(bound)).limit(length).toArray();
     }

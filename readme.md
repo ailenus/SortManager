@@ -8,12 +8,13 @@ heapsort, insertion sort, merge sort, quicksort, selection sort, and tree sort.
 ## Organisation
 
 The repository consists of several packages, of which `com.spartaglobal.ymao` is
-the root. The `main` package consists of the main class `App` containing the
-main method, a `Sort` enum, and a `SortTime` class for testing execution time.
-The `sorter` package consists of the sorting algorithms, as well as an abstract
-class `Sort` which is the superclass of all sorting classes, and the `Sorter`
-interface, which `Sort` implements. The `util` package consists of the `Utility`
-class, which hosts auxiliary methods that are used by the unit tests.
+the root. The `main` package consists of the main class `Main` containing the
+main method. The `sorter` package consists of the sorting algorithms, as well as
+an abstract class `Sort` which is the superclass of all sorting classes, and the
+`Sorter` interface, which `Sort` implements. The `util` package contains several
+auxiliary classes, including the `InputProcessor` class for processing user
+input, the `RandomArray` class for generating an array of random integers, and
+the `SortType` enum which helps processing the various sorting algorithms.
 
 The unit test repository consists of one package `sorter`, which contains an
 abstract `SortTest` class which is the superclass of all other unit test
@@ -21,11 +22,21 @@ classes.
 
 ## The `main` package
 
-The `Sort` enum has seven elements, corresponding to the seven sorting
-algorithms implemented in this repository. The enum is used by the `SortTime`
-class, which contains a single static method `executionTime`, used to time each
-sorting algorithm, using the `nanoTime` method from the `java.lang.System` class
-in the standard library. The main class `App` prints the results of the execution time tests to the standard output.
+The main program is presented with a number of sorting algorithms to choose from
+and prompted to enter their choice via the standard input. The user is then
+asked for the desired length of the array to be randomly generated. The
+auxiliary method `inputInteger` of the class `InputProcessor` from the `util`
+package is invoked for processing these user inputs to ensure robustness.
+
+The program then prints the randomly generated array, the sorting algorithm
+chosen by the user, the sorted array, and the execution time in nanoseconds.
+Various classes are used to accomplish these tasks, including the `SortType`
+enum and the `RandomArray` class from the `util` package, as well as the
+`Sorter` interface from the `sorter` package.
+
+It is of note that none of the individual sorting classes of the `sorter`
+package is accessed in any way, fulfilling the abstraction and encapsulation
+principles.
 
 ## The `sorter` package
 
@@ -84,16 +95,34 @@ tree and assigns its node keys to the passed array.
 
 ## The `util` package
 
-The `Utility` class contains several methods used for unit testing. It contains
-two private fields of arrays of integers named `input` and `result`. Both
-private fields have a public accessor method, `getInput` and `getResult`. It
-also contains a public method `random` for generating an array of random
-integers, using the `java.util.IntStream` and `java.util.Random` classes from
-the standard library. It also has a public `initialise` method for initialising
-the two private fields of integer arrays, which is used for unit tests.
+The `InputProcessor` class consists of a single public static method
+`inputInteger`, which takes a string parameter `prompt` and an integer parameter
+`bound` and returns an integer. The method uses a `java.util.BufferedReader`,
+which takes an `java.util.InputStreamReader` that uses the standard input
+stream. It then initialises the return value `input` as $-1$ before entering an
+infinite loop including a `try`&#8211;`catch` block that catches the
+`java.lang.NumberFormatException` thrown by the `parseInt` method of the
+`java.lang.Integer` class when the user does not enter an integer. An `if`
+statement is then used to ensure the user enters an integer between $0$ and
+`bound`. Each loop iteration also prints the passed string `prompt` to the
+standard output. The method then returns the `input` value as entered by the
+user when they enters a valid input.
 
-The `random` class used for generating an array of random integers has a brief
-Javadoc written.
+The `RandomArray` class contains a public `getRandomArray` method for generating
+an array of random integers, as well as several methods used for unit testing.
+The `getRandomArray` method uses `java.util.IntStream` and `java.util.Random` to
+generate an array of specified length of integers between $0$ and the specified
+upper bound, including $0$ and excluding the upper bound.
+
+The class also contains two private fields of arrays of integers named `input`
+and `result`. Both private fields have public accessor methods, `getInput` and
+`getResult`. It also has a public `initialise` method for initialising the two
+private fields of integer arrays, storing a randomly generated array in `input`
+and storing the sorted array in `result`. These methods are used for unit tests.
+
+The `SortType` enum contains seven objects corresponding to the seven sorting
+algorithms. It also has a public `getSorter` method that takes an object of this
+enum and returns a corresponding instance of the `Sorter` interface.
 
 ## Unit tests
 

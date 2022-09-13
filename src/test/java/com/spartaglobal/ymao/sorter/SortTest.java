@@ -2,12 +2,12 @@ package com.spartaglobal.ymao.sorter;
 
 import org.junit.Test;
 
-import static com.spartaglobal.ymao.util.Utility.*;
+import static com.spartaglobal.ymao.util.RandomArray.*;
 
 public abstract class SortTest {
 
     public final void initialiseLarge() {
-        initialise(10_000, Integer.MAX_VALUE);
+        initialise(5_000, Integer.MAX_VALUE);
     }
     
     public final void initialiseZero() {

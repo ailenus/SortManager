@@ -4,7 +4,7 @@ import static org.junit.Assert.assertArrayEquals;
 
 import org.junit.Test;
 
-import static com.spartaglobal.ymao.util.Utility.*;
+import static com.spartaglobal.ymao.util.RandomArray.*;
 
 public class TreeSortTest extends SortTest {
 
