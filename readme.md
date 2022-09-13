@@ -1,4 +1,4 @@
-# Sorter
+# Sort Manager
 
 This is a collection of sorting algorithms.
 
