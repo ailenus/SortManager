@@ -27,7 +27,7 @@ public class TreeSort extends Sort {
                 node = new Node(key);
                 return node;
             }
-            if (key < node.key) {
+            if (key <= node.key) {
                 node.left = insert(node.left, key);
             } else if (key > node.key) {
                 node.right = insert(node.right, key);

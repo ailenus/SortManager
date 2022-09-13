@@ -24,7 +24,7 @@ public class Main {
         int choice = InputProcessor.inputInteger("Enter your choice: ",
                 6);
         SortType sortType = SortType.values()[choice];
-        System.out.println("Choose the length of the array to be generated.\n"
+        System.out.println("\nChoose the length of the array to be generated.\n"
                 + "The length should be between 0 and 5,000.");
         int length = InputProcessor.inputInteger("Enter length: ",
                 5_000);
@@ -39,13 +39,13 @@ public class Main {
         endTime = System.nanoTime();
         long executionTime = endTime - startTime;
 
-        System.out.println("The randomly generated array is as follows.");
+        System.out.println("\nThe randomly generated array is as follows.");
         System.out.println(Arrays.toString(array));
-        System.out.println("Your chosen sorting algorithm is "
+        System.out.println("\nYour chosen sorting algorithm is "
             + sortType.toString().toLowerCase().replace("_", " ") + ".");
-        System.out.println("The sorted array is as follows.");
+        System.out.println("\nThe sorted array is as follows.");
         System.out.println(Arrays.toString(sortedArray));
-        System.out.println("The execution time is " + executionTime
+        System.out.println("\nThe execution time is " + executionTime
                 + " nanoseconds.");
 
     }
