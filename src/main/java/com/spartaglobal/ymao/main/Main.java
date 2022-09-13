@@ -46,7 +46,7 @@ public class Main {
         System.out.println("\nThe sorted array is as follows.");
         System.out.println(Arrays.toString(sortedArray));
         System.out.println("\nThe execution time is " + executionTime
-                + " nanoseconds.");
+                + " nanoseconds.\n");
 
     }
 

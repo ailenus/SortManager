@@ -108,17 +108,10 @@ statement is then used to ensure the user enters an integer between $0$ and
 standard output. The method then returns the `input` value as entered by the
 user when they enters a valid input.
 
-The `RandomArray` class contains a public `getRandomArray` method for generating
-an array of random integers, as well as several methods used for unit testing.
-The `getRandomArray` method uses `java.util.IntStream` and `java.util.Random` to
-generate an array of specified length of integers between $0$ and the specified
-upper bound, including $0$ and excluding the upper bound.
-
-The class also contains two private fields of arrays of integers named `input`
-and `result`. Both private fields have public accessor methods, `getInput` and
-`getResult`. It also has a public `initialise` method for initialising the two
-private fields of integer arrays, storing a randomly generated array in `input`
-and storing the sorted array in `result`. These methods are used for unit tests.
+The `RandomArray` class consists of a single public `getRandomArray` method for
+generating an array of random integers, which uses `java.util.IntStream` and
+`java.util.Random` to generate an array of specified length of integers between
+$0$ and the specified upper bound, including $0$ and excluding the upper bound.
 
 The `SortType` enum contains seven objects corresponding to the seven sorting
 algorithms. It also has a public `getSorter` method that takes an object of this
@@ -127,14 +120,24 @@ enum and returns a corresponding instance of the `Sorter` interface.
 ## Unit tests
 
 The abstract `SortTest` is the superclass for all other classes of unit tests,
-which contains two final methods, `initialiseLarge` and `initialiseZero`, both
-of which invoke the `initialise` method from the `Utility` class using different
-arguments, for testing large arrays of large elements and testing empty arrays.
-It also contains three abstract methods to be overridden by each unit test
-class, named `testLarge`, `testZero`, and `testSorted`. The `testLarge` method
-is the unit test for testing each of the sorting algorithms with large values,
-and the `testZero` method is that with empty values. The `testSorted` is used
-for testing sorting an array that is already sorted.
+which contains two private static fields of arrays of integers named `input` and
+`result`. Both private static fields have protected static accessor methods,
+`getInput` and `getResult`. It also has a private `initialise` method for
+initialising the two private fields of integer arrays, storing a randomly
+generated array in `input`, invoking the `getRandomArray` method from the
+`RandomArray` class in the `util` package, and storing the sorted array in
+`result`, invoking the `sort` method from the `java.util.Arrays` class in the
+standard library.
+
+The class also contains two protected final static methods, `initialiseLarge`
+and `initialiseZero`, both of which invoke the `initialise` method using
+different arguments, for testing large arrays of large elements and testing
+empty arrays.  It also contains three public abstract methods using the `@Test`
+annotation from `org.junit` to be overridden by each unit test class, named
+`testLarge`, `testZero`, and `testSorted`. The `testLarge` method is the unit
+test for testing each of the sorting algorithms with large values, and the
+`testZero` method is that with empty values. The `testSorted` is used for
+testing sorting an array that is already sorted.
 
 Each of the seven testing classes implements the three abstract classes by
 invoking either the `initialiseLarge` or the `initialiseZero` method of the
