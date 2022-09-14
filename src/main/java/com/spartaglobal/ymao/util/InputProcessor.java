@@ -10,7 +10,7 @@ public class InputProcessor {
             throws IOException {
         BufferedReader bufferedReader = new BufferedReader(new
                 InputStreamReader(System.in));
-        int input = -1;
+        int input;
         while (true) {
             System.out.print(prompt);
             try {
@@ -27,7 +27,6 @@ public class InputProcessor {
             }
             break;
         }
-        bufferedReader.close();
         return input;
     }
 

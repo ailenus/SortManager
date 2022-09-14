@@ -12,22 +12,23 @@ public class Main {
 
     public static void main(String[] args) throws IOException {
 
-        System.out.println("Welcome to the sort manager application.\n"
-                + "Choose a sorting algorithm by entering its number option:\n"
-                + "0: bubble sort\n"
-                + "1: heapsort\n"
-                + "2: insertion sort\n"
-                + "3: merge sort\n"
-                + "4: quicksort\n"
-                + "5: selection sort\n"
-                + "6: tree sort");
-        int choice = InputProcessor.inputInteger("Enter your choice: ",
-                6);
+        System.out.println("""
+                Welcome to the sort manager application.
+                Choose a sorting algorithm by entering its number option:
+                0: bubble sort
+                1: heapsort
+                2: insertion sort
+                3: merge sort
+                4: quicksort
+                5: selection sort
+                6: tree sort""");
+        int choice = InputProcessor.inputInteger("Enter your choice: ", 6);
         SortType sortType = SortType.values()[choice];
-        System.out.println("\nChoose the length of the array to be generated.\n"
-                + "The length should be between 0 and 5,000.");
-        int length = InputProcessor.inputInteger("Enter length: ",
-                5_000);
+        System.out.println("""
+
+                Choose the length of the array to be generated.
+                The length should be between 0 and 5,000.""");
+        int length = InputProcessor.inputInteger("Enter length: ", 5_000);
         int[] array = RandomArray.getRandomArray(length, 10_000);
 
         int[] sortedArray;
