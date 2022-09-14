@@ -27,6 +27,7 @@ public class InputProcessor {
             }
             break;
         }
+        bufferedReader.close();
         return input;
     }
 
