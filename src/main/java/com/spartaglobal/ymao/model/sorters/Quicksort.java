@@ -1,6 +1,16 @@
-package com.spartaglobal.ymao.sorter;
+package com.spartaglobal.ymao.model.sorters;
+
+import com.spartaglobal.ymao.model.Sort;
 
 public class Quicksort extends Sort {
+
+    private static final Quicksort QUICKSORT = new Quicksort();
+
+    private Quicksort() {}
+
+    public static Quicksort getInstance() {
+        return QUICKSORT;
+    }
 
     @Override
     protected void sortHelper(int[] array, int length) {

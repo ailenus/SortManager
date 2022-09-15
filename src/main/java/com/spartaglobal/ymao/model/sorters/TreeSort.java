@@ -1,6 +1,16 @@
-package com.spartaglobal.ymao.sorter;
+package com.spartaglobal.ymao.model.sorters;
+
+import com.spartaglobal.ymao.model.Sort;
 
 public class TreeSort extends Sort {
+
+    private static final TreeSort TREE_SORT = new TreeSort();
+
+    private TreeSort() {}
+
+    public static TreeSort getInstance() {
+        return TREE_SORT;
+    }
 
     @Override
     protected void sortHelper(int[] array, int length) {
@@ -9,7 +19,7 @@ public class TreeSort extends Sort {
         binaryTree.traverseInOrder(binaryTree.root, array, 0);
     }
 
-    private class BinaryTree {
+    private static class BinaryTree {
         private Node root;
 
         private void insert(int[] array, int length) {
@@ -29,7 +39,7 @@ public class TreeSort extends Sort {
             }
             if (key <= node.key) {
                 node.left = insert(node.left, key);
-            } else if (key > node.key) {
+            } else {
                 node.right = insert(node.right, key);
             }
             return node;
@@ -49,8 +59,8 @@ public class TreeSort extends Sort {
             return index;
         }
 
-        private class Node {
-            private int key;
+        private static class Node {
+            private final int key;
             private Node left;
             private Node right;
 

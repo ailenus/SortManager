@@ -1,9 +1,9 @@
-package com.spartaglobal.ymao.util;
+package com.spartaglobal.ymao.controller;
 
 import java.util.Random;
 import java.util.stream.IntStream;
 
-public class RandomArray {
+public class SortManager {
 
     public static int[] getRandomArray(int length, int bound) {
         return IntStream.generate(()

@@ -1,6 +1,16 @@
-package com.spartaglobal.ymao.sorter;
+package com.spartaglobal.ymao.model.sorters;
+
+import com.spartaglobal.ymao.model.Sort;
 
 public class MergeSort extends Sort {
+
+    private static final MergeSort MERGE_SORT = new MergeSort();
+
+    private MergeSort() {}
+
+    public static MergeSort getInstance() {
+        return MERGE_SORT;
+    }
 
     @Override
     protected void sortHelper(int[] array, int length) {

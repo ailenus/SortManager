@@ -1,6 +1,16 @@
-package com.spartaglobal.ymao.sorter;
+package com.spartaglobal.ymao.model.sorters;
+
+import com.spartaglobal.ymao.model.Sort;
 
 public class InsertionSort extends Sort {
+
+    private static final InsertionSort INSERTION_SORT = new InsertionSort();
+
+    private InsertionSort() {}
+
+    public static InsertionSort getInstance() {
+        return INSERTION_SORT;
+    }
 
     @Override
     protected void sortHelper(int[] array, int length) {

@@ -1,6 +1,16 @@
-package com.spartaglobal.ymao.sorter;
+package com.spartaglobal.ymao.model.sorters;
+
+import com.spartaglobal.ymao.model.Sort;
 
 public class Heapsort extends Sort {
+
+    private static final Heapsort HEAPSORT = new Heapsort();
+
+    private Heapsort() {}
+
+    public static Heapsort getInstance() {
+        return HEAPSORT;
+    }
 
     @Override
     protected void sortHelper(int[] array, int length) {

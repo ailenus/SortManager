@@ -1,6 +1,16 @@
-package com.spartaglobal.ymao.sorter;
+package com.spartaglobal.ymao.model.sorters;
+
+import com.spartaglobal.ymao.model.Sort;
 
 public class SelectionSort extends Sort {
+
+    private static final SelectionSort SELECTION_SORT = new SelectionSort();
+
+    private SelectionSort() {}
+
+    public static SelectionSort getInstance() {
+        return SELECTION_SORT;
+    }
 
     @Override
     protected void sortHelper(int[] array, int length) {

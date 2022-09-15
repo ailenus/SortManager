@@ -1,4 +1,4 @@
-package com.spartaglobal.ymao.sorter;
+package com.spartaglobal.ymao.model;
 
 import java.util.Arrays;
 

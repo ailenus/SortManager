@@ -1,6 +1,16 @@
-package com.spartaglobal.ymao.sorter;
+package com.spartaglobal.ymao.model.sorters;
+
+import com.spartaglobal.ymao.model.Sort;
 
 public class BubbleSort extends Sort {
+
+    private static final BubbleSort BUBBLE_SORT = new BubbleSort();
+
+    private BubbleSort() {}
+
+    public static BubbleSort getInstance() {
+        return BUBBLE_SORT;
+    }
 
     @Override
     protected void sortHelper(int[] array, int length) {

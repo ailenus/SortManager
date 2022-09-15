@@ -1,12 +1,17 @@
-package com.spartaglobal.ymao.sorter;
+package com.spartaglobal.ymao.sorters;
 
 import org.junit.Test;
 
-import static com.spartaglobal.ymao.util.RandomArray.getRandomArray;
+import java.util.Arrays;
 
-import java.util.Arrays;;
+import static com.spartaglobal.ymao.controller.SortManager.getRandomArray;
 
 public abstract class SortTest {
+
+    private static final int LARGE_LENGTH = 5_000;
+    private static final int LARGE_BOUND = Integer.MAX_VALUE;
+    private static final int ZERO_LENGTH = 0;
+    private static final int ZERO_BOUND = 1;
 
     private static int[] input;
     private static int[] result;
@@ -17,12 +22,12 @@ public abstract class SortTest {
         Arrays.sort(result);
     }
 
-    protected final static void initialiseLarge() {
-        initialise(5_000, Integer.MAX_VALUE);
+    protected static void initialiseLarge() {
+        initialise(LARGE_LENGTH, LARGE_BOUND);
     }
     
-    protected final static void initialiseZero() {
-        initialise(0, 1);
+    protected static void initialiseZero() {
+        initialise(ZERO_LENGTH, ZERO_BOUND);
     }
 
     protected static int[] getInput() {
