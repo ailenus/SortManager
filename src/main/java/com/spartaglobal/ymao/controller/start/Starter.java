@@ -5,7 +5,7 @@ import com.spartaglobal.ymao.model.Sorter;
 import com.spartaglobal.ymao.model.SorterType;
 import com.spartaglobal.ymao.view.DisplayManager;
 
-public class Start {
+public class Starter {
 
     private static final SorterType[] SORTER_TYPES = SorterType.values();
     private static final int SORTER_COUNT = SORTER_TYPES.length;

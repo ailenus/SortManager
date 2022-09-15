@@ -1,9 +1,9 @@
 package com.spartaglobal.ymao.sorters;
 
 import com.spartaglobal.ymao.model.sorters.Heapsort;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
-import static org.junit.Assert.assertArrayEquals;
+import static org.junit.jupiter.api.Assertions.assertArrayEquals;
 
 public class HeapsortTest extends SortTest {
 
