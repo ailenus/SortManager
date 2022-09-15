@@ -1,8 +1,12 @@
 package com.spartaglobal.ymao.model.sorters;
 
 import com.spartaglobal.ymao.model.Sort;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 public class MergeSort extends Sort {
+
+    private static final Logger LOGGER = LogManager.getLogger(MergeSort.class);
 
     private static final MergeSort MERGE_SORT = new MergeSort();
 
@@ -14,6 +18,7 @@ public class MergeSort extends Sort {
 
     @Override
     protected void sortHelper(int[] array, int length) {
+        LOGGER.info("Inside MergeSort.sortHelper.");
         mergeSort(array, length);
     }
 

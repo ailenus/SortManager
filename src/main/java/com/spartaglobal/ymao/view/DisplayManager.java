@@ -6,20 +6,38 @@ import com.spartaglobal.ymao.view.display.OutputPrinter;
 
 public class DisplayManager {
 
-    public static int getSorterChoice(int bound) {
+    public static int getMode(int bound) {
+        InputPrompter.promptMode();
+        return InputProcessor.inputInteger("Enter your choice: ", bound);
+    }
+
+    public static int getSorter(int bound) {
         InputPrompter.promptSorter();
         return InputProcessor.inputInteger("Enter your choice: ", bound);
     }
 
-    public static int getArrayLength(int bound) {
-        InputPrompter.promptArrayLength();
+    public static int getAnotherSorter(int bound) {
+        InputPrompter.promptAnotherSorter();
+        return InputProcessor.inputInteger("Enter your choice: ", bound);
+    }
+
+    public static void sameSorter() {
+        printLine("You entered the same option. Please enter another option.");
+    }
+
+    public static int getLength(int bound) {
+        InputPrompter.promptLength();
         return InputProcessor.inputInteger("Enter length: ", bound);
     }
 
-    public static void printOutput(int[] input, String sorterType, int[] result,
-                                   long executionTime) {
-        OutputPrinter.printOutput(input, sorterType, result, executionTime);
+    public static void printOutput0(int[] input, String sorterType, int[] result,
+                                    double executionTime) {
+        OutputPrinter.printOutput0(input, sorterType, result, executionTime);
 
+    }
+
+    public static void printOutput1(String sorterType, double executionTime) {
+        OutputPrinter.printOutput1(sorterType, executionTime);
     }
 
     public static void print(String string) {

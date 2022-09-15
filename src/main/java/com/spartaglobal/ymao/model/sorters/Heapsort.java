@@ -1,8 +1,12 @@
 package com.spartaglobal.ymao.model.sorters;
 
 import com.spartaglobal.ymao.model.Sort;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 public class Heapsort extends Sort {
+
+    private static final Logger LOGGER = LogManager.getLogger(Heapsort.class);
 
     private static final Heapsort HEAPSORT = new Heapsort();
 
@@ -14,6 +18,7 @@ public class Heapsort extends Sort {
 
     @Override
     protected void sortHelper(int[] array, int length) {
+        LOGGER.info("Inside Heapsort.sortHelper.");
         for (int index = length / 2 - 1; index >= 0; index--) {
             heapify(array, length, index);
         }

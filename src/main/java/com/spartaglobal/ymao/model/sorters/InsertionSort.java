@@ -1,8 +1,12 @@
 package com.spartaglobal.ymao.model.sorters;
 
 import com.spartaglobal.ymao.model.Sort;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 public class InsertionSort extends Sort {
+
+    private static final Logger LOGGER = LogManager.getLogger(InsertionSort.class);
 
     private static final InsertionSort INSERTION_SORT = new InsertionSort();
 
@@ -14,6 +18,7 @@ public class InsertionSort extends Sort {
 
     @Override
     protected void sortHelper(int[] array, int length) {
+        LOGGER.info("Inside InsertionSort.sortHelper.");
         for (int index = 1; index < length; index++) {
             int key = array[index];
             int i = index - 1;

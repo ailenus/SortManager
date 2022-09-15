@@ -1,8 +1,12 @@
 package com.spartaglobal.ymao.model.sorters;
 
 import com.spartaglobal.ymao.model.Sort;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 public class Quicksort extends Sort {
+
+    private static final Logger LOGGER = LogManager.getLogger(Quicksort.class);
 
     private static final Quicksort QUICKSORT = new Quicksort();
 
@@ -14,6 +18,7 @@ public class Quicksort extends Sort {
 
     @Override
     protected void sortHelper(int[] array, int length) {
+        LOGGER.info("Inside Quicksort.sortHelper.");
         quicksort(array, 0, length - 1);
     }
 

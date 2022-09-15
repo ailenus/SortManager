@@ -1,8 +1,12 @@
 package com.spartaglobal.ymao.model.sorters;
 
 import com.spartaglobal.ymao.model.Sort;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 public class TreeSort extends Sort {
+
+    private static final Logger LOGGER = LogManager.getLogger(TreeSort.class);
 
     private static final TreeSort TREE_SORT = new TreeSort();
 
@@ -14,6 +18,7 @@ public class TreeSort extends Sort {
 
     @Override
     protected void sortHelper(int[] array, int length) {
+        LOGGER.info("Inside TreeSort.sortHelper.");
         BinaryTree binaryTree = new BinaryTree();
         binaryTree.insert(array, length);
         binaryTree.traverseInOrder(binaryTree.root, array, 0);
