@@ -153,8 +153,8 @@ method `traverseInOrder` which performs an in-order traversal of the binary
 tree.
 
 It is noted that all classes in the `model` package are used only by
-the `Starter` and the `SorterFactory` classes outside this package, and all
-classes of this package uses no classes from the other packages of this project,
+the `Starter` and the `SorterFactory` classes outside this package, and no class
+of this package uses another class from the other packages of this project,
 making this package self-contained.
 
 ## The `view` package
@@ -182,7 +182,7 @@ catching an `java.io.IOException` thrown from the buffered reader, the logger
 generates an error-level log and the system exits with exit status `1`.
 
 The `InputPrompter` class contains several public static methods for printing
-user prompts. Each method invokes the a printing method of the `DisplayManager`
+user prompts. Each method invokes a printing method of the `DisplayManager`
 class.
 
 The `OutputPrinter` class contains two public static methods, `printOutput0`
@@ -190,8 +190,8 @@ and `printOutput1`, which invokes printing methods from the `DisplayManager` and
 prints the program output corresponding.
 
 It is noted that all classes in the `view` package are used only by
-the `Starter` class outside this package, and all classes of this package uses
-no classes from the other packages of this project, making this package
+the `Starter` class outside this package, and no class of this package uses
+another class from the other packages of this project, making this package
 self-contained.
 
 ## Unit testing
