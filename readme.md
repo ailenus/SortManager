@@ -12,10 +12,9 @@ subdirectories, `controller`, `model`, and `view`, conforming to the
 model&#8211;view&#8211;controller (MVC) architecture.
 
 The `controller` package consists of two additional packages, `exceptions`
-and `start`, as well as a class `SortManager`. The `exceptions` package consists
-of two classes, `ModeException` and `SortException`. The `start` package
-consists of the main class `Main`, the `Starter` class, and the `SorterFactory`
-class.
+and `start`, and a class `SortManager`. The `exceptions` package consists of two
+classes, `ModeException` and `SortException`. The `start` package consists of
+the main class `Main`, the `Starter` class, and the `SorterFactory` class.
 
 The `model` package consists of another package `sorters`, an abstract
 class `Sort`, an interface `Sorter`, and an enum `SorterType`. The `sorters`
@@ -33,20 +32,22 @@ classes: `BubbleSortTest`, `HeapsortTest`, `InsertionSortTest`, `MergeSortTest`
 
 Finally, at the root of the repository, there is a `resources` directory, which
 is the root of resources and consists of the `.properties` file for the Log4j 2
-logging framework.
+logging framework, and any log files generated will be stored here. Log files
+are not uploaded to the remote repository on GitHub by their inclusion in
+the `.gitignore` file.
 
 ## The `controller` package
 
 The `SortManager` class contains one public static method, `getRandomArray`,
 which takes two integer primitive parameters, `length` and `bound`, and returns
-an integer primitive array. The method invokes the public static `generate`
+an array of integer primitives. The method invokes the public static `generate`
 method of the `java.util.stream.IntStream` class and passes it a lambda
 expression containing the public static `nextInt` method of
-the `java.util.Random` class, and then invokes the `limit` and then
-the `toArray` methods on the generated `IntStream`. The `length` parameter is
-passed to the `limit` method to specify the length of the array, and the `bound`
-parameter is passed to the `nextInt` method to specify the upper bound of the
-integer primitives to be randomly generated.
+the `java.util.Random` class, and then invokes the `limit` and the `toArray`
+methods on the generated `IntStream`. The `length` parameter is passed to
+the `limit` method to specify the length of the array, and the `bound` parameter
+is passed to the `nextInt` method to specify the upper bound of the integer
+primitives to be randomly generated. 
 
 The `ModeException` class of the `exceptions` package extends
 the `java.lang.Exception` class and contains one public constructor which takes
@@ -91,14 +92,13 @@ caught, induces a warn-level log.
 The application starts by prompting the user to choose between selecting a
 sorting algorithm to sort a randomly generated array and selecting two sorting
 algorithms to compare their performance in sorting a randomly generated array.
-The program then ask to use to choose one or two sorting algorithms among the
+The program then asks the user to choose one or two sorting algorithms among the
 seven options: bubble sort, heapsort, insertion sort, merge sort, quicksort,
 selection sort, and tree sort. The user is then asked to enter the length of the
 array to be randomly generated. The program then prints the randomly generated
 array, the sorted array, the chosen sorting algorithm, and the execution time of
-the sorting algorithm. If the user chose to compare two algorithms, the second
-chosen algorithm and the execution time of the second algorithm are printed as
-well.
+the sorting algorithm. If the user selected comparing two algorithms, the second
+chosen algorithm and the execution time thereof are printed as well.
 
 ## The `model` package
 
@@ -106,8 +106,9 @@ The abstract `Sort` class implements the `Sorter` interface, overrides
 the `sort` method of the `Sorter` interface as public final, and contains one
 more protected abstract method `sortHelper`, which takes an array of integer
 primitives `array` and an integer primitive `length` and returns nothing. The
-overridden `sort` method makes a copy of the passed array using the public
-static `copyOf` method of the `java.util.Array` class and invokes
+concrete implementations of `sortHelper` sorts the passed array in ascending
+order. The overridden `sort` method makes a copy of the passed array using the
+public static `copyOf` method of the `java.util.Array` class and invokes
 the `sortHelper` method with the array copy and the length of the array before
 returning the array copy.
 
@@ -118,60 +119,80 @@ It is noted that the parameter `array` is not modified and the returned array is
 sorted and contains the exact elements of `array`.
 
 The `SorterType` enum contains seven members, corresponding to the seven sorting
-algorithms: `BUBBLE_SORT`, `HEAPSORT`, `INSERTION_SORT`, `MERGE_SORT`
-, `QUICKSORT`, `SELECTION_SORT`, and `TREE_SORT`.
+classes: `BUBBLE_SORT`, `HEAPSORT`, `INSERTION_SORT`, `MERGE_SORT` , `QUICKSORT`
+, `SELECTION_SORT`, and `TREE_SORT`.
 
-The seven classes in the `sorters` package each extends the `Sort` class and
-overrides the protected `sortHelper` method using the sorting algorithm of its
-name.
+The seven sorting classes in the `sorters` package each extend the `Sort` class
+and overrides the protected `sortHelper` method using the sorting algorithm
+corresponding to the name of the class.
 
 It is noted that each sorting class contains a private static
-final `org.apache.logging.log4j.Logger` used for logging, which generates an
-info-level log at the very start of the `sortHelper` method.
+final `org.apache.logging.log4j.Logger`, which generates an info-level log at
+the very start of the `sortHelper` method.
 
 Each sorting class also contains a private static final instance of the class,
-has its default constructor private, and has a public static `getInstance`
-method which returns the private static final instance.
+has its default constructor private with no other constructors, and contains a
+public static `getInstance` method which returns the private static final
+instance.
 
-It is noted that each sorting class implements the singleton design pattern.
+As such, each sorting class implements the singleton design pattern.
 
 Of the seven sorting classes, `BubbleSort`, `InsertionSort`, and `SelectionSort`
 do not contain anything else. The `Heapsort` class additionally contains a
 private static `heapify` method. The `MergeSort` class contains two private
-static methods, `mergeSort` and `merge`. The `Quicksort` class contains two
-private static methods, `quicksort` and `partition`. The `TreeSort` class
+static methods, `mergeSort` and `merge`, of which `mergeSort` is recursive.
+The `Quicksort` class contains two private static methods, `quicksort`
+and `partition`, of which `quicksort` is recursive. The `TreeSort` class
 contains a private static nested class `BinaryTree`, which contains another
 private static nested class `Node`. The `Node` nested class contains a private
 final field of integer primitive `key`, two private fields of `Node`, `left`
 and `right`, and a private constructor which takes an integer primitive `key`.
 The `BinaryTree` nested class contains a private field of `Node`, `root`, three
-overloaded private methods `insert`, and a private method `traverseInOrder`.
+overloaded private methods `insert`, one of which is recursive, and a private
+method `traverseInOrder` which performs an in-order traversal of the binary
+tree.
+
+It is noted that all classes in the `model` package are used only by
+the `Starter` and the `SorterFactory` classes outside this package, and all
+classes of this package uses no classes from the other packages of this project,
+making this package self-contained.
 
 ## The `view` package
 
 The `DisplayManager` class contains several public static methods for printing
-prompts to the standard output stream, getting input from the user from the
-standard input stream, and printing program output to the standard output
-stream. Most methods invoke public static methods of the classes contained in
-the `display` package.
+prompts to the standard output stream, getting user input from the standard
+input stream, and printing program output to the standard output stream. Most
+methods invoke public static methods of the classes contained in the `display`
+package.
+
+The `DisplayManager` class also contains several printing methods for printing
+to the standard output stream, which are used by all classes in the `display`
+package. This encapsulation is for ease of modification, in case the program
+needs to print to other streams such as files, where only these printing methods
+of the `DisplayManager` class require change.
 
 The `InputProcessor` class of the `display` package contains one private static
 final `org.apache.logging.log4j.Logger` and one public static
 method `inputInteger` which takes a string `prompt` and an integer
 primitive `bound` and returns an integer primitive. The method `inputInteger`
-uses a `java.io.BufferedReader` which takes a `java.io.InputStreamReader` taking
-the `java.lang.System.in` input stream. Then in an infinite loop it ensures that
-the user enters a correct integer within the specified bound. When catching
-an `java.io.IOException`, the logger generates an error-level log and the system
-exits with exit status `1`.
+uses a `java.io.BufferedReader` which takes an `java.io.InputStreamReader`
+taking the `java.lang.System.in` input stream. Then in an infinite loop it
+ensures that the user enters a correct integer within the specified bound. When
+catching an `java.io.IOException` thrown from the buffered reader, the logger
+generates an error-level log and the system exits with exit status `1`.
 
 The `InputPrompter` class contains several public static methods for printing
-prompts to the output. Each method invokes the printing methods from
-the `DisplayManager` class.
+user prompts. Each method invokes the a printing method of the `DisplayManager`
+class.
 
 The `OutputPrinter` class contains two public static methods, `printOutput0`
-and `printOutput1`, which invokes the printing methods from the `DisplayManager`
-and prints the program output corresponding to the two program modes.
+and `printOutput1`, which invokes printing methods from the `DisplayManager` and
+prints the program output corresponding.
+
+It is noted that all classes in the `view` package are used only by
+the `Starter` class outside this package, and all classes of this package uses
+no classes from the other packages of this project, making this package
+self-contained.
 
 ## Unit testing
 
@@ -190,7 +211,7 @@ the `org.junit.jupiter.api.Test` interface.
 
 Each of the seven sorting testing classes extends the abstract `SortTest` class
 and overrides the `testLarge`, `testZero`, and `testResult` methods. Each method
-invokes either the `initialiseLarge` or `initialiseZero` method of the
+invokes either the `initialiseLarge` or the `initialiseZero` method of the
 superclass before invoking the public static `assertArrayEquals` method of
 the `org.junit.jupiter.api.Assertions` class.
 
@@ -201,5 +222,5 @@ Object-oriented principles including abstraction and encapsulation, design
 patterns including the factory pattern and the singleton pattern, the MVC
 architecture, and development practices such as logging and unit testing are
 exemplified. Additionally, language features such as recursion, exception
-handling, nested classes, lambda expressions, and many classes from the standard
-library are utilised.
+handling, streams, nested classes, lambda expressions, and many classes from the
+standard library are utilised.
