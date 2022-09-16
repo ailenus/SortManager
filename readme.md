@@ -1,146 +1,205 @@
 # Sort Manager
 
-This is a collection of sorting algorithms.
-
-Currently, there are seven sorting algorithms implemented: bubble sort,
-heapsort, insertion sort, merge sort, quicksort, selection sort, and tree sort.
+This project is a collection of sorting algorithms, meant to demonstrate
+software development principles such as unit testing, design patterns, logging,
+and object-oriented design principles.
 
 ## Organisation
 
-The repository consists of several packages, of which `com.spartaglobal.ymao` is
-the root. The `main` package consists of the main class `Main` containing the
-main method. The `sorter` package consists of the sorting algorithms, as well as
-an abstract class `Sort` which is the superclass of all sorting classes, and
-the `Sorter` interface, which `Sort` implements. The `util` package contains
-several auxiliary classes, including the `InputProcessor` class for processing
-user input, the `RandomArray` class for generating an array of random integers,
-and the `SortType` enum which helps process the various sorting algorithms.
+The repository consists of several packages, the root whereof
+is `com.spartaglobal.ymao`. The root directory contains three
+subdirectories, `controller`, `model`, and `view`, conforming to the
+model&#8211;view&#8211;controller (MVC) architecture.
 
-The unit test repository consists of one package `sorter`, which contains an
-abstract `SortTest` class which is the superclass of all other unit test
-classes.
+The `controller` package consists of two additional packages, `exceptions`
+and `start`, as well as a class `SortManager`. The `exceptions` package consists
+of two classes, `ModeException` and `SortException`. The `start` package
+consists of the main class `Main`, the `Starter` class, and the `SorterFactory`
+class.
 
-## The `main` package
+The `model` package consists of another package `sorters`, an abstract
+class `Sort`, an interface `Sorter`, and an enum `SorterType`. The `sorters`
+package consists of seven classes: `BubbleSort`, `Heapsort` , `InsertionSort`
+, `MergeSort`, `Quicksort`, `SelectionSort`, and `TreeSort`. 
 
-The main program is presented with a number of sorting algorithms to choose from
-and prompted to enter their choice via the standard input. The user is then
-asked for the desired length of the array to be randomly generated. The
-auxiliary method `inputInteger` of the class `InputProcessor` from the `util`
-package is invoked for processing these user inputs to ensure robustness.
+The `view` package consists of another package `display`, and a
+class `DisplayManager`. The `display` package consists of three
+classes: `InputProcessor`, `InputPrompter`, and `OutputPrinter`.
 
-The program then prints the randomly generated array, the sorting algorithm
-chosen by the user, the sorted array, and the execution time in nanoseconds.
-Various classes are used to accomplish these tasks, including the `SortType`
-enum and the `RandomArray` class from the `util` package, as well as
-the `Sorter` interface from the `sorter` package.
+Additionally, unit tests are contained in the `com.spartaglobal.ymao.sorters`
+package, which consists of an abstract class `SortTest` and seven
+classes: `BubbleSortTest`, `HeapsortTest`, `InsertionSortTest`, `MergeSortTest`
+, `QuicksortTest`, `SelectionSortTest`, and `TreeSortTest`.
 
-It is of note that none of the individual sorting classes of the `sorter`
-package is accessed in any way, fulfilling the abstraction and encapsulation
-principles.
+Finally, at the root of the repository, there is a `resources` directory, which
+is the root of resources and consists of the `.properties` file for the Log4j 2
+logging framework.
 
-## The `sorter` package
+## The `controller` package
 
-The `Sorter` interface contains a single `sort` method, which takes an array and
-returns an array that is sorted and contains the exact elements as in the passed
-array.
+The `SortManager` class contains one public static method, `getRandomArray`,
+which takes two integer primitive parameters, `length` and `bound`, and returns
+an integer primitive array. The method invokes the public static `generate`
+method of the `java.util.stream.IntStream` class and passes it a lambda
+expression containing the public static `nextInt` method of
+the `java.util.Random` class, and then invokes the `limit` and then
+the `toArray` methods on the generated `IntStream`. The `length` parameter is
+passed to the `limit` method to specify the length of the array, and the `bound`
+parameter is passed to the `nextInt` method to specify the upper bound of the
+integer primitives to be randomly generated.
 
-The abstract `Sort` class, implementing the `Sorter` interface, overrides
-the `sort` method as final and invokes a protected abstract method `sortHelper`
-that is overridden using different sorting algorithms by its seven subclasses.
-The `sort` method in this class simply makes a copy of the input array and
-invokes the `sortHelper` method and passing it the array copy before returning
-it. The `sortHelper` method additionally takes the length of the array as an
-integer parameter, since all sorting algorithms make use of the array length.
-This abstraction eliminates duplicate code of accessing the array length in its
-subclasses.
+The `ModeException` class of the `exceptions` package extends
+the `java.lang.Exception` class and contains one public constructor which takes
+one string parameter `message` and invokes the constructor of the superclass
+with the `message` parameter.
 
-There are currently seven different sorting algorithms contained in this
-package: bubble sort, heapsort, insertion sort, merge sort, quicksort, selection
-sort, and tree sort. Each of the sorting algorithms has its own class that
-extends the abstract `Sort` class and overrides the protected `sortHelper`
-method, using the named sorting algorithm.
+The `SortException` class extends the `java.lang.RuntimeException` class and
+contains one public constructor which takes one string parameter `message` and
+invokes the constructor of the superclass with the `message` parameter.
 
-The `BubbleSort`, `InsertionSort`, and `SelectionSort` classes are
-straightforward, containing only the protected overridden `sortHelper` method.
+It is noted that `ModeException` is a checked exception, while `SortException`
+is unchecked.
 
-The `Heapsort` class uses in addition a private `heapify` method for
-implementing a heap, which is invoked by its implementation of the `sortHelper`
-method.
+The `Main` class of the `starter` package contains the main method, which
+invokes the public static method `start` of the `Starter` class.
 
-The `MergeSort` class contains two additional private methods, `mergeSort`
-and `merge`. The `mergeSort` method recurses and invokes the `merge` method, and
-the `merge` method merges two sorted arrays. Its implementation of `sortHelper`
-simply invokes the `mergeSort` method.
+The `SorterFactory` class contains one public static method `getSorter`, which
+takes one `SorterType` parameter `sorterType` and returns a `Sorter`. The method
+uses a switch lambda expression and matches the `sorterType` to one of the seven
+members of the `SorterType` enum before returning the instance of the
+corresponding class by invoking the `getInstance` method of each of the seven
+sorting classes.
 
-The `Quicksort` class also contains two private methods, `quicksort`
-and `partition`. The `quicksort` method recurses and invokes the `partition`
-method, and the `partition` method returns the index of the partition. Its
-implementation of `sortHelper` invokes the `quicksort` method.
+It is noted that `SorterFactory` implements the factory design pattern.
 
-The `TreeSort` class contains a private nested class `BinaryTree`, which
-furthermore contains a private nested class `Node`. The `Node` class contains
-three private fields, an integer `key` as well as a `left` and a `right`
-reference of `Node`. The `Node` class has one private constructor which simply
-initialises `key` as the passed integer.
+The `Starter` class contains the bulk of the program execution logic. It
+contains several private static final fields, several private static fields,
+and three private static methods, `input`, `process`, and `output`, in addition
+to the public static method `start`. The `start` method invokes the `input`
+, `process`, and `output` methods in sequence.
 
-The `BinaryTree` class contains one private field `root` which stores a `Node`
-object. It also contains three overloaded methods named `insert`, taking an
-integer array, an integer primitive, and a `Node` object and an integer
-primitive respectively. The `insert` method taking an integer array invokes
-the `insert` method taking an integer primitive, which in turn invokes
-the `insert` method taking a `Node` object and an integer primitive. These
-methods construct a binary tree data structure. Additionally, it has a
-private `traverseInOrder` method, which does a depth-first in-order traversal of
-the constructed binary tree and assigns its node keys to the passed array.
+It is noted that the `input` and `output` methods throw and
+catch `ModeException`, and that the `process` method throws and
+catches `SortException`. The class also uses
+the `org.apache.logging.log4j.LogManager` and
+the `org.apache.logging.log4j.Logger` classes from the Log4j 2 library to log
+these exceptions when they are caught in addition to handling them.
+The `ModeException`, when caught, induces a fatal-level log and causes the
+program to terminate with exist status `1`, and the `SortException`, when
+caught, induces a warn-level log.
 
-## The `util` package
+The application starts by prompting the user to choose between selecting a
+sorting algorithm to sort a randomly generated array and selecting two sorting
+algorithms to compare their performance in sorting a randomly generated array.
+The program then ask to use to choose one or two sorting algorithms among the
+seven options: bubble sort, heapsort, insertion sort, merge sort, quicksort,
+selection sort, and tree sort. The user is then asked to enter the length of the
+array to be randomly generated. The program then prints the randomly generated
+array, the sorted array, the chosen sorting algorithm, and the execution time of
+the sorting algorithm. If the user chose to compare two algorithms, the second
+chosen algorithm and the execution time of the second algorithm are printed as
+well.
 
-The `InputProcessor` class consists of a single public static
-method `inputInteger`, which takes a string parameter `prompt` and an integer
-parameter `bound` and returns an integer. The method uses
-a `java.util.BufferedReader`, which takes an `java.util.InputStreamReader` that
-uses the standard input stream. It then initialises the return value `input` as
-$-1$ before entering an infinite loop including a `try`&#8211;`catch` block that
-catches the `java.lang.NumberFormatException` thrown by the `parseInt` method of
-the `java.lang.Integer` class when the user does not enter an integer. An `if`
-statement is then used to ensure the user enters an integer between $0$
-and `bound`. Each loop iteration also prints the passed string `prompt` to the
-standard output. The method then returns the `input` value as entered by the
-user when they enter a valid input.
+## The `model` package
 
-The `RandomArray` class consists of a single public `getRandomArray` method for
-generating an array of random integers, which uses `java.util.IntStream`
-and `java.util.Random` to generate an array of specified length of integers
-between $0$ and the specified upper bound, including $0$ and excluding the upper
-bound.
+The abstract `Sort` class implements the `Sorter` interface, overrides
+the `sort` method of the `Sorter` interface as public final, and contains one
+more protected abstract method `sortHelper`, which takes an array of integer
+primitives `array` and an integer primitive `length` and returns nothing. The
+overridden `sort` method makes a copy of the passed array using the public
+static `copyOf` method of the `java.util.Array` class and invokes
+the `sortHelper` method with the array copy and the length of the array before
+returning the array copy.
 
-The `SortType` enum contains seven objects corresponding to the seven sorting
-algorithms. It also has a public `getSorter` method that takes an object of this
-enum and returns a corresponding instance of the `Sorter` interface.
+The `Sorter` interface contains the one method `sort`, which takes an array of
+integer primitives `array` and returns an array of integer primitives.
 
-## Unit tests
+It is noted that the parameter `array` is not modified and the returned array is
+sorted and contains the exact elements of `array`.
 
-The abstract `SortTest` is the superclass for all other classes of unit tests,
-which contains two private static fields of arrays of integers named `input`
-and `result`. Both private static fields have protected static accessor
-methods, `getInput` and `getResult`. It also has a private `initialise` method
-for initialising the two private fields of integer arrays, storing a randomly
-generated array in `input`, invoking the `getRandomArray` method from
-the `RandomArray` class in the `util` package, and storing the sorted array
-in `result`, invoking the `sort` method from the `java.util.Arrays` class in the
-standard library.
+The `SorterType` enum contains seven members, corresponding to the seven sorting
+algorithms: `BUBBLE_SORT`, `HEAPSORT`, `INSERTION_SORT`, `MERGE_SORT`
+, `QUICKSORT`, `SELECTION_SORT`, and `TREE_SORT`.
 
-The class also contains two protected final static methods, `initialiseLarge`
-and `initialiseZero`, both of which invoke the `initialise` method using
-different arguments, for testing large arrays of large elements and testing
-empty arrays. It also contains three public abstract methods using the `@Test`
-annotation from `org.junit` to be overridden by each unit test class,
-named `testLarge`, `testZero`, and `testSorted`. The `testLarge` method is the
-unit test for testing each of the sorting algorithms with large values, and the
-`testZero` method is that with empty values. The `testSorted` is used for
-testing sorting an array that is already sorted.
+The seven classes in the `sorters` package each extends the `Sort` class and
+overrides the protected `sortHelper` method using the sorting algorithm of its
+name.
 
-Each of the seven testing classes implements the three abstract classes by
-invoking either the `initialiseLarge` or the `initialiseZero` method of the
-superclass and then using the `assertArrayEquals` method from
-the `org.junit.Assert` class.
+It is noted that each sorting class contains a private static
+final `org.apache.logging.log4j.Logger` used for logging, which generates an
+info-level log at the very start of the `sortHelper` method.
+
+Each sorting class also contains a private static final instance of the class,
+has its default constructor private, and has a public static `getInstance`
+method which returns the private static final instance.
+
+It is noted that each sorting class implements the singleton design pattern.
+
+Of the seven sorting classes, `BubbleSort`, `InsertionSort`, and `SelectionSort`
+do not contain anything else. The `Heapsort` class additionally contains a
+private static `heapify` method. The `MergeSort` class contains two private
+static methods, `mergeSort` and `merge`. The `Quicksort` class contains two
+private static methods, `quicksort` and `partition`. The `TreeSort` class
+contains a private static nested class `BinaryTree`, which contains another
+private static nested class `Node`. The `Node` nested class contains a private
+final field of integer primitive `key`, two private fields of `Node`, `left`
+and `right`, and a private constructor which takes an integer primitive `key`.
+The `BinaryTree` nested class contains a private field of `Node`, `root`, three
+overloaded private methods `insert`, and a private method `traverseInOrder`.
+
+## The `view` package
+
+The `DisplayManager` class contains several public static methods for printing
+prompts to the standard output stream, getting input from the user from the
+standard input stream, and printing program output to the standard output
+stream. Most methods invoke public static methods of the classes contained in
+the `display` package.
+
+The `InputProcessor` class of the `display` package contains one private static
+final `org.apache.logging.log4j.Logger` and one public static
+method `inputInteger` which takes a string `prompt` and an integer
+primitive `bound` and returns an integer primitive. The method `inputInteger`
+uses a `java.io.BufferedReader` which takes a `java.io.InputStreamReader` taking
+the `java.lang.System.in` input stream. Then in an infinite loop it ensures that
+the user enters a correct integer within the specified bound. When catching
+an `java.io.IOException`, the logger generates an error-level log and the system
+exits with exit status `1`.
+
+The `InputPrompter` class contains several public static methods for printing
+prompts to the output. Each method invokes the printing methods from
+the `DisplayManager` class.
+
+The `OutputPrinter` class contains two public static methods, `printOutput0`
+and `printOutput1`, which invokes the printing methods from the `DisplayManager`
+and prints the program output corresponding to the two program modes.
+
+## Unit testing
+
+The abstract `SortTest` class contains the following members:
+
+- four private static final fields of integer primitives, `LARGE_LENGTH`
+  , `LARGE_BOUND`, `ZERO_LENGTH`, and `ZERO_BOUND`;
+- two private static fields of integer primitive arrays, `input` and `result`;
+- one private static method `initialise`;
+- four protected static methods, `initialiseLarge`, `initialiseZero`, `getInput`
+  , and `getResult`; and
+- three public abstract methods, `testLarge`, `testZero`, and `testSorted`.
+
+It is noted that the three public abstract methods are annotated using
+the `org.junit.jupiter.api.Test` interface.
+
+Each of the seven sorting testing classes extends the abstract `SortTest` class
+and overrides the `testLarge`, `testZero`, and `testResult` methods. Each method
+invokes either the `initialiseLarge` or `initialiseZero` method of the
+superclass before invoking the public static `assertArrayEquals` method of
+the `org.junit.jupiter.api.Assertions` class.
+
+## Summary
+
+The project demonstrates several key concepts in software development.
+Object-oriented principles including abstraction and encapsulation, design
+patterns including the factory pattern and the singleton pattern, the MVC
+architecture, and development practices such as logging and unit testing are
+exemplified. Additionally, language features such as recursion, exception
+handling, nested classes, lambda expressions, and many classes from the standard
+library are utilised.

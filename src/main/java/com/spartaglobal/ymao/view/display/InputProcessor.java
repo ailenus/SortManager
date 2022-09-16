@@ -26,7 +26,7 @@ public class InputProcessor {
                 continue;
             } catch (IOException exception) {
                 exception.printStackTrace();
-                LOGGER.fatal(exception.getMessage(), exception);
+                LOGGER.error(exception.getMessage(), exception);
                 System.exit(1);
             }
             if (input < 0 || input > bound) {
